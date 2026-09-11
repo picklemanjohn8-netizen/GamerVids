@@ -1,0 +1,1116 @@
+{
+  "videos": [
+    {
+      "id": "vid-4k-cybercity",
+      "title": "Neon Odyssey: 4K 60FPS Cyberpunk Cinema Journey (Official HDR Master)",
+      "description": "Experience the breathtaking visual architecture of Neo-Tokyo rendered in native 4K 2160p at 60 frames per second with full dynamic range. Shot using high-end cinema lenses with immersive spatial ambisonic audio.\n\nChapters:\n0:00 - Arrival at Neon District\n0:45 - High-Speed Monorail Flight\n1:30 - Holographic Market\n2:10 - Cybernetic Alleyways\n\nProduction Gear: RED V-Raptor 8K VV, Master Anamorphic T1.9.\nAudio Mix: Dolby Atmos Mastered.",
+      "format": "long-form",
+      "videoUrl": "/videos/cyberpunk_4k.mp4",
+      "maxResolution": "4K (2160p)",
+      "fps": 60,
+      "aspectRatio": "16:9",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1200&auto=format&fit=crop",
+      "duration": 734,
+      "durationFormatted": "12:14",
+      "views": 428900,
+      "likes": 31200,
+      "dislikes": 240,
+      "shares": 4890,
+      "isLikedByUser": false,
+      "isDislikedByUser": false,
+      "creator": {
+        "id": "chan-cyberarts",
+        "name": "Cinema Lab 4K",
+        "handle": "@cinemalab4k",
+        "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
+        "subscribers": 245000,
+        "isVerified": true,
+        "isPartner": true,
+        "totalEarnings": 8420.5,
+        "monthlyRevenue": 2410.8
+      },
+      "createdAt": "2026-09-08T14:30:00.000Z",
+      "tags": [
+        "4K",
+        "HDR",
+        "Cyberpunk",
+        "Cinematic",
+        "60fps",
+        "Tech"
+      ],
+      "category": "Film & Animation",
+      "chapters": [
+        {
+          "id": "c1",
+          "title": "Arrival at Neon District",
+          "timestamp": 0,
+          "timestampFormatted": "0:00"
+        },
+        {
+          "id": "c2",
+          "title": "High-Speed Flight",
+          "timestamp": 45,
+          "timestampFormatted": "0:45"
+        },
+        {
+          "id": "c3",
+          "title": "Holographic Market",
+          "timestamp": 90,
+          "timestampFormatted": "1:30"
+        },
+        {
+          "id": "c4",
+          "title": "Cybernetic Alleyways",
+          "timestamp": 130,
+          "timestampFormatted": "2:10"
+        }
+      ],
+      "isMonetized": true,
+      "adSettings": {
+        "hasPreRoll": true,
+        "hasMidRoll": true,
+        "midRollPoints": [
+          45,
+          90
+        ],
+        "cpmRate": 18.5,
+        "estimatedEarnings": 3140.25
+      },
+      "moderation": {
+        "status": "APPROVED",
+        "overallScore": 98,
+        "contentRating": "ALL_AGES",
+        "adEligibility": "MONETIZED_FULL",
+        "isCopyrightSafe": true,
+        "summary": "Verified original 4K cinematic production. Clean audio and visual standards. Ad-suitability 100% compliant with YouTube Partner safety criteria.",
+        "timestamp": "2026-09-08T14:31:10.000Z",
+        "automatedBy": "Gemini 3.8 Automated Safety Engine",
+        "categories": [
+          {
+            "category": "Violence & Gore",
+            "score": 100,
+            "flagged": false,
+            "notes": "No violent content detected"
+          },
+          {
+            "category": "Hate & Harassment",
+            "score": 100,
+            "flagged": false,
+            "notes": "Zero toxic speech or harassment"
+          },
+          {
+            "category": "Explicit / Adult",
+            "score": 100,
+            "flagged": false,
+            "notes": "Safe for all demographics"
+          },
+          {
+            "category": "Spam & Misleading",
+            "score": 98,
+            "flagged": false,
+            "notes": "Accurate technical metadata and description"
+          },
+          {
+            "category": "Copyright & IP Integrity",
+            "score": 96,
+            "flagged": false,
+            "notes": "Original cinema footage cleared"
+          },
+          {
+            "category": "4K Technical Standards",
+            "score": 99,
+            "flagged": false,
+            "notes": "Verified 3840x2160 native resolution at 60 FPS"
+          }
+        ]
+      },
+      "commentsCount": 14,
+      "directSharesCount": 68,
+      "is4KMaster": true,
+      "fileSizeMb": 1240
+    },
+    {
+      "id": "vid-4k-wildlife-escape",
+      "title": "Wonders of Patagonia: Pristine Glaciers & Wildlife in Ultra HD (Full Documentary)",
+      "description": "Journey into one of the most untouched wilderness frontiers on Earth. Captured over 90 days in Patagonia using 4K ultra-telephoto stabilization. Hear the roaring glacial calving and witness condors gliding across jagged granite spires.\n\nEnjoy in 2160p 4K for maximum fidelity.\nMusic: Ambient Orchestral Wildlife Score (Licensed).",
+      "format": "long-form",
+      "videoUrl": "/videos/wildlife_patagonia.mp4",
+      "maxResolution": "4K (2160p)",
+      "fps": 60,
+      "aspectRatio": "16:9",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200&auto=format&fit=crop",
+      "duration": 890,
+      "durationFormatted": "14:50",
+      "views": 189200,
+      "likes": 18450,
+      "dislikes": 85,
+      "shares": 2310,
+      "isLikedByUser": false,
+      "isDislikedByUser": false,
+      "creator": {
+        "id": "chan-wildearth",
+        "name": "Earth Explorer 4K",
+        "handle": "@earthexplorer",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
+        "subscribers": 512000,
+        "isVerified": true,
+        "isPartner": true,
+        "totalEarnings": 14200,
+        "monthlyRevenue": 3820
+      },
+      "createdAt": "2026-09-09T18:00:00.000Z",
+      "tags": [
+        "4K",
+        "Wildlife",
+        "Documentary",
+        "Nature",
+        "Travel",
+        "Relaxing"
+      ],
+      "category": "Travel & Events",
+      "chapters": [
+        {
+          "id": "c1",
+          "title": "The Glacial Wall",
+          "timestamp": 0,
+          "timestampFormatted": "0:00"
+        },
+        {
+          "id": "c2",
+          "title": "Granite Towers",
+          "timestamp": 120,
+          "timestampFormatted": "2:00"
+        },
+        {
+          "id": "c3",
+          "title": "Emerald Fjords",
+          "timestamp": 320,
+          "timestampFormatted": "5:20"
+        }
+      ],
+      "isMonetized": true,
+      "adSettings": {
+        "hasPreRoll": true,
+        "hasMidRoll": true,
+        "midRollPoints": [
+          120,
+          320
+        ],
+        "cpmRate": 16,
+        "estimatedEarnings": 2180
+      },
+      "moderation": {
+        "status": "APPROVED",
+        "overallScore": 99,
+        "contentRating": "ALL_AGES",
+        "adEligibility": "MONETIZED_FULL",
+        "isCopyrightSafe": true,
+        "summary": "High-aesthetic educational documentary. Verified family-friendly and green-tier ad eligibility.",
+        "timestamp": "2026-09-09T18:01:20.000Z",
+        "automatedBy": "Gemini 3.8 Automated Safety Engine",
+        "categories": [
+          {
+            "category": "Violence & Gore",
+            "score": 100,
+            "flagged": false,
+            "notes": "Natural wildlife observation only"
+          },
+          {
+            "category": "Hate & Harassment",
+            "score": 100,
+            "flagged": false,
+            "notes": "None detected"
+          },
+          {
+            "category": "Explicit / Adult",
+            "score": 100,
+            "flagged": false,
+            "notes": "None detected"
+          },
+          {
+            "category": "Spam & Misleading",
+            "score": 99,
+            "flagged": false,
+            "notes": "High educational value"
+          },
+          {
+            "category": "Copyright & IP Integrity",
+            "score": 100,
+            "flagged": false,
+            "notes": "Royalty-free score & original camera files"
+          },
+          {
+            "category": "4K Technical Standards",
+            "score": 98,
+            "flagged": false,
+            "notes": "Genuine 4K UHD 60fps bitrate"
+          }
+        ]
+      },
+      "commentsCount": 9,
+      "directSharesCount": 34,
+      "is4KMaster": true,
+      "fileSizeMb": 1850
+    },
+    {
+      "id": "vid-4k-blender-bunny",
+      "title": "Big Buck Bunny: Enhanced 4K 60FPS Remastered Edition",
+      "description": "The iconic open-source animation masterpiece rendered in modern 4K resolution at smooth 60 frames per second. Follow the gentle forest giant Bunny as he teaches the playful forest tricksters a hilarious lesson.\n\nOpen Source Cinema License (Creative Commons). Full monetization and community remixing supported.",
+      "format": "long-form",
+      "videoUrl": "/videos/wildlife_patagonia.mp4",
+      "maxResolution": "4K (2160p)",
+      "fps": 60,
+      "aspectRatio": "16:9",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1200&auto=format&fit=crop",
+      "duration": 596,
+      "durationFormatted": "9:56",
+      "views": 890400,
+      "likes": 67300,
+      "dislikes": 420,
+      "shares": 8910,
+      "isLikedByUser": false,
+      "isDislikedByUser": false,
+      "creator": {
+        "id": "chan-openanim",
+        "name": "Open Cinema Studio",
+        "handle": "@opencinema",
+        "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200&auto=format&fit=crop",
+        "subscribers": 890000,
+        "isVerified": true,
+        "isPartner": true,
+        "totalEarnings": 22400,
+        "monthlyRevenue": 4900
+      },
+      "createdAt": "2026-09-05T10:15:00.000Z",
+      "tags": [
+        "4K",
+        "Animation",
+        "Comedy",
+        "OpenSource",
+        "Blender",
+        "Family"
+      ],
+      "category": "Film & Animation",
+      "chapters": [
+        {
+          "id": "c1",
+          "title": "Morning in the Glade",
+          "timestamp": 0,
+          "timestampFormatted": "0:00"
+        },
+        {
+          "id": "c2",
+          "title": "The Apple Incident",
+          "timestamp": 90,
+          "timestampFormatted": "1:30"
+        },
+        {
+          "id": "c3",
+          "title": "Bunny Strikes Back",
+          "timestamp": 240,
+          "timestampFormatted": "4:00"
+        }
+      ],
+      "isMonetized": true,
+      "adSettings": {
+        "hasPreRoll": true,
+        "hasMidRoll": true,
+        "midRollPoints": [
+          90,
+          240
+        ],
+        "cpmRate": 14.2,
+        "estimatedEarnings": 4520
+      },
+      "moderation": {
+        "status": "APPROVED",
+        "overallScore": 100,
+        "contentRating": "ALL_AGES",
+        "adEligibility": "MONETIZED_FULL",
+        "isCopyrightSafe": true,
+        "summary": "Verified open-source animated creative work. Exceptional family and community rating.",
+        "timestamp": "2026-09-05T10:16:00.000Z",
+        "automatedBy": "Gemini 3.8 Automated Safety Engine",
+        "categories": [
+          {
+            "category": "Violence & Gore",
+            "score": 100,
+            "flagged": false,
+            "notes": "Slapstick cartoon comedy only"
+          },
+          {
+            "category": "Hate & Harassment",
+            "score": 100,
+            "flagged": false,
+            "notes": "None detected"
+          },
+          {
+            "category": "Explicit / Adult",
+            "score": 100,
+            "flagged": false,
+            "notes": "None detected"
+          },
+          {
+            "category": "Spam & Misleading",
+            "score": 100,
+            "flagged": false,
+            "notes": "Authentic classic"
+          },
+          {
+            "category": "Copyright & IP Integrity",
+            "score": 100,
+            "flagged": false,
+            "notes": "Creative Commons 3.0 attribution compliant"
+          },
+          {
+            "category": "4K Technical Standards",
+            "score": 99,
+            "flagged": false,
+            "notes": "Crystal clear 4K 60fps"
+          }
+        ]
+      },
+      "commentsCount": 18,
+      "directSharesCount": 112,
+      "is4KMaster": true,
+      "fileSizeMb": 980
+    },
+    {
+      "id": "vid-short-waterfall-drop",
+      "title": "Secret Hidden 4K Waterfall in Iceland 🌊 #Shorts #Nature #Travel",
+      "description": "Would you hike 6 hours across volcanic canyons to see this mystical blue waterfall? Drop a like if you love untamed nature! #Shorts #Iceland #Waterfall #4K",
+      "format": "shorts",
+      "videoUrl": "/videos/nature_short.mp4",
+      "maxResolution": "4K (2160p)",
+      "fps": 60,
+      "aspectRatio": "9:16",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?q=80&w=800&auto=format&fit=crop",
+      "duration": 28,
+      "durationFormatted": "0:28",
+      "views": 942000,
+      "likes": 88400,
+      "dislikes": 610,
+      "shares": 14200,
+      "isLikedByUser": false,
+      "isDislikedByUser": false,
+      "creator": {
+        "id": "chan-wildearth",
+        "name": "Earth Explorer 4K",
+        "handle": "@earthexplorer",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
+        "subscribers": 512000,
+        "isVerified": true,
+        "isPartner": true
+      },
+      "createdAt": "2026-09-10T12:00:00.000Z",
+      "tags": [
+        "Shorts",
+        "Nature",
+        "Iceland",
+        "4K",
+        "Relax"
+      ],
+      "category": "Travel & Events",
+      "isMonetized": true,
+      "adSettings": {
+        "hasPreRoll": false,
+        "hasMidRoll": false,
+        "cpmRate": 6.8,
+        "estimatedEarnings": 640.56
+      },
+      "moderation": {
+        "status": "APPROVED",
+        "overallScore": 100,
+        "contentRating": "ALL_AGES",
+        "adEligibility": "MONETIZED_FULL",
+        "isCopyrightSafe": true,
+        "summary": "Shorts algorithm verified safe. High viewer retention signals. Monetized under Shorts Creator Pool.",
+        "timestamp": "2026-09-10T12:00:30.000Z",
+        "automatedBy": "Gemini 3.8 Automated Safety Engine",
+        "categories": [
+          {
+            "category": "Violence & Gore",
+            "score": 100,
+            "flagged": false,
+            "notes": "Safe nature"
+          },
+          {
+            "category": "Hate & Harassment",
+            "score": 100,
+            "flagged": false,
+            "notes": "Safe"
+          },
+          {
+            "category": "Explicit / Adult",
+            "score": 100,
+            "flagged": false,
+            "notes": "Safe"
+          },
+          {
+            "category": "Spam & Misleading",
+            "score": 99,
+            "flagged": false,
+            "notes": "Genuine short format"
+          },
+          {
+            "category": "Copyright & IP Integrity",
+            "score": 100,
+            "flagged": false,
+            "notes": "Original audio track"
+          },
+          {
+            "category": "4K Technical Standards",
+            "score": 98,
+            "flagged": false,
+            "notes": "Vertical 4K 9:16 aspect ratio verified"
+          }
+        ]
+      },
+      "commentsCount": 22,
+      "directSharesCount": 310,
+      "is4KMaster": true,
+      "fileSizeMb": 140
+    },
+    {
+      "id": "vid-short-latte-mastery",
+      "title": "World Champion Barista Latte Art in 15 Seconds ☕ #Shorts #Coffee",
+      "description": "Watch this swan latte art pour at 120 FPS slow motion! Would you drink it or keep looking at it? ☕✨ #Coffee #Barista #Shorts",
+      "format": "shorts",
+      "videoUrl": "/videos/latte_short.mp4",
+      "maxResolution": "1080p 60fps",
+      "fps": 60,
+      "aspectRatio": "9:16",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=800&auto=format&fit=crop",
+      "duration": 16,
+      "durationFormatted": "0:16",
+      "views": 654000,
+      "likes": 62101,
+      "dislikes": 310,
+      "shares": 8900,
+      "isLikedByUser": true,
+      "isDislikedByUser": false,
+      "creator": {
+        "id": "chan-crafts",
+        "name": "Artisan Crafts",
+        "handle": "@artisancrafts",
+        "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop",
+        "subscribers": 184000,
+        "isVerified": false,
+        "isPartner": true
+      },
+      "createdAt": "2026-09-10T16:20:00.000Z",
+      "tags": [
+        "Shorts",
+        "Coffee",
+        "Art",
+        "Food",
+        "Satisfying"
+      ],
+      "category": "Howto & Style",
+      "isMonetized": true,
+      "adSettings": {
+        "hasPreRoll": false,
+        "hasMidRoll": false,
+        "cpmRate": 5.5,
+        "estimatedEarnings": 359.7
+      },
+      "moderation": {
+        "status": "APPROVED",
+        "overallScore": 100,
+        "contentRating": "ALL_AGES",
+        "adEligibility": "MONETIZED_FULL",
+        "isCopyrightSafe": true,
+        "summary": "Verified wholesome culinary craftsmanship. Clean audio and family friendly.",
+        "timestamp": "2026-09-10T16:20:30.000Z",
+        "automatedBy": "Gemini 3.8 Automated Safety Engine",
+        "categories": [
+          {
+            "category": "Violence & Gore",
+            "score": 100,
+            "flagged": false,
+            "notes": "Zero"
+          },
+          {
+            "category": "Hate & Harassment",
+            "score": 100,
+            "flagged": false,
+            "notes": "Zero"
+          },
+          {
+            "category": "Explicit / Adult",
+            "score": 100,
+            "flagged": false,
+            "notes": "Zero"
+          },
+          {
+            "category": "Spam & Misleading",
+            "score": 100,
+            "flagged": false,
+            "notes": "Authentic craftsmanship"
+          },
+          {
+            "category": "Copyright & IP Integrity",
+            "score": 100,
+            "flagged": false,
+            "notes": "Original audio"
+          },
+          {
+            "category": "4K Technical Standards",
+            "score": 95,
+            "flagged": false,
+            "notes": "High-definition 60fps vertical"
+          }
+        ]
+      },
+      "commentsCount": 16,
+      "directSharesCount": 195,
+      "is4KMaster": false,
+      "fileSizeMb": 85
+    },
+    {
+      "id": "vid-4k-scifi-elephants",
+      "title": "Elephants Dream: Next-Gen 4K Remastered Open CGI Thriller",
+      "description": "Step inside the mechanical machine mind with Emo and Proog in this groundbreaking 4K remastered computer-animated journey. Featuring spatial 3D surround sound and hyper-detailed mechanical gears in ultra resolution.",
+      "format": "long-form",
+      "videoUrl": "/videos/quantum_computing.mp4",
+      "maxResolution": "4K (2160p)",
+      "fps": 60,
+      "aspectRatio": "16:9",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=1200&auto=format&fit=crop",
+      "duration": 653,
+      "durationFormatted": "10:53",
+      "views": 310500,
+      "likes": 24800,
+      "dislikes": 190,
+      "shares": 3140,
+      "isLikedByUser": false,
+      "isDislikedByUser": false,
+      "creator": {
+        "id": "chan-openanim",
+        "name": "Open Cinema Studio",
+        "handle": "@opencinema",
+        "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200&auto=format&fit=crop",
+        "subscribers": 890000,
+        "isVerified": true,
+        "isPartner": true,
+        "totalEarnings": 22400,
+        "monthlyRevenue": 4900
+      },
+      "createdAt": "2026-09-02T11:00:00.000Z",
+      "tags": [
+        "4K",
+        "SciFi",
+        "Animation",
+        "CGI",
+        "Blender"
+      ],
+      "category": "Film & Animation",
+      "isMonetized": true,
+      "adSettings": {
+        "hasPreRoll": true,
+        "hasMidRoll": true,
+        "midRollPoints": [
+          180,
+          420
+        ],
+        "cpmRate": 15.2,
+        "estimatedEarnings": 2890
+      },
+      "moderation": {
+        "status": "APPROVED",
+        "overallScore": 97,
+        "contentRating": "TEEN_13",
+        "adEligibility": "MONETIZED_FULL",
+        "isCopyrightSafe": true,
+        "summary": "Sci-fi fantasy themes suitable for general and teen audiences. Cleared for full ad revenue.",
+        "timestamp": "2026-09-02T11:01:00.000Z",
+        "automatedBy": "Gemini 3.8 Automated Safety Engine",
+        "categories": [
+          {
+            "category": "Violence & Gore",
+            "score": 96,
+            "flagged": false,
+            "notes": "Stylized surreal mechanical fantasy"
+          },
+          {
+            "category": "Hate & Harassment",
+            "score": 100,
+            "flagged": false,
+            "notes": "Zero"
+          },
+          {
+            "category": "Explicit / Adult",
+            "score": 100,
+            "flagged": false,
+            "notes": "Zero"
+          },
+          {
+            "category": "Spam & Misleading",
+            "score": 98,
+            "flagged": false,
+            "notes": "True description"
+          },
+          {
+            "category": "Copyright & IP Integrity",
+            "score": 100,
+            "flagged": false,
+            "notes": "Creative Commons 2.5"
+          },
+          {
+            "category": "4K Technical Standards",
+            "score": 98,
+            "flagged": false,
+            "notes": "Native 4K rendering"
+          }
+        ]
+      },
+      "commentsCount": 11,
+      "directSharesCount": 82,
+      "is4KMaster": true,
+      "fileSizeMb": 1100
+    }
+  ],
+  "comments": {
+    "vid-4k-cybercity": [
+      {
+        "id": "com-1",
+        "videoId": "vid-4k-cybercity",
+        "userId": "user-marcus",
+        "userName": "Marcus Vance",
+        "userAvatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop",
+        "content": "The color grading on those neon billboards at 0:45 in native 4K 60fps on an OLED screen is pure art! Hats off to the lighting crew.",
+        "timestamp": "2 days ago",
+        "likes": 184,
+        "isLikedByUser": false,
+        "isCreatorHearted": true,
+        "replies": [
+          {
+            "id": "com-1-rep-1",
+            "videoId": "vid-4k-cybercity",
+            "userId": "chan-cyberarts",
+            "userName": "Cinema Lab 4K",
+            "userAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
+            "content": "Thank you Marcus! We spent over 80 hours mastering the color palette in ACES HDR to preserve the highlight roll-off.",
+            "timestamp": "1 day ago",
+            "likes": 42,
+            "isCreator": true
+          }
+        ]
+      },
+      {
+        "id": "com-2",
+        "videoId": "vid-4k-cybercity",
+        "userId": "user-elena",
+        "userName": "Elena Rostova",
+        "userAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop",
+        "content": "Sent this directly to my filmmaking class. Best example of spatial cinematography on the web right now.",
+        "timestamp": "1 day ago",
+        "likes": 92,
+        "isLikedByUser": false,
+        "isSuperThanks": true,
+        "superThanksAmount": 10
+      },
+      {
+        "id": "com-3",
+        "videoId": "vid-4k-cybercity",
+        "userId": "user-dave",
+        "userName": "David Kim",
+        "userAvatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=150&auto=format&fit=crop",
+        "content": "Can confirm 4K streaming is buttery smooth without any buffering. Great automated moderation on this platform keeping comments clean too!",
+        "timestamp": "8 hours ago",
+        "likes": 31,
+        "isLikedByUser": false
+      }
+    ],
+    "vid-4k-wildlife-escape": [
+      {
+        "id": "com-w1",
+        "videoId": "vid-4k-wildlife-escape",
+        "userId": "user-clara",
+        "userName": "Dr. Clara Thorne",
+        "userAvatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150&auto=format&fit=crop",
+        "content": "The acoustic recording of the ice shelf shifting at 5:20 is phenomenal. You can feel the sheer scale of the glacier.",
+        "timestamp": "1 day ago",
+        "likes": 128,
+        "isCreatorHearted": true,
+        "isSuperThanks": true,
+        "superThanksAmount": 25
+      },
+      {
+        "id": "com-w2",
+        "videoId": "vid-4k-wildlife-escape",
+        "userId": "user-sam",
+        "userName": "Samir Patel",
+        "userAvatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=150&auto=format&fit=crop",
+        "content": "Nature documentaries like this deserve every penny of creator monetization. Just joined as a channel member!",
+        "timestamp": "12 hours ago",
+        "likes": 47
+      }
+    ],
+    "vid-short-waterfall-drop": [
+      {
+        "id": "com-s1",
+        "videoId": "vid-short-waterfall-drop",
+        "userId": "user-maya",
+        "userName": "Maya Lin",
+        "userAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150&auto=format&fit=crop",
+        "content": "The water is so crystal clear it looks like liquid sapphire! Adding this to my bucket list now.",
+        "timestamp": "5 hours ago",
+        "likes": 312
+      }
+    ]
+  },
+  "moderationLogs": [
+    {
+      "id": "mod-vid-4k-cybercity",
+      "videoId": "vid-4k-cybercity",
+      "videoTitle": "Neon Odyssey: 4K 60FPS Cyberpunk Cinema Journey (Official HDR Master)",
+      "creatorName": "Cinema Lab 4K",
+      "overallScore": 98,
+      "status": "APPROVED",
+      "contentRating": "ALL_AGES",
+      "adEligibility": "MONETIZED_FULL",
+      "summary": "Verified original 4K cinematic production. Clean audio and visual standards. Ad-suitability 100% compliant with YouTube Partner safety criteria.",
+      "timestamp": "2026-09-08T14:31:10.000Z",
+      "categories": [
+        {
+          "category": "Violence & Gore",
+          "score": 100,
+          "flagged": false,
+          "notes": "No violent content detected"
+        },
+        {
+          "category": "Hate & Harassment",
+          "score": 100,
+          "flagged": false,
+          "notes": "Zero toxic speech or harassment"
+        },
+        {
+          "category": "Explicit / Adult",
+          "score": 100,
+          "flagged": false,
+          "notes": "Safe for all demographics"
+        },
+        {
+          "category": "Spam & Misleading",
+          "score": 98,
+          "flagged": false,
+          "notes": "Accurate technical metadata and description"
+        },
+        {
+          "category": "Copyright & IP Integrity",
+          "score": 96,
+          "flagged": false,
+          "notes": "Original cinema footage cleared"
+        },
+        {
+          "category": "4K Technical Standards",
+          "score": 99,
+          "flagged": false,
+          "notes": "Verified 3840x2160 native resolution at 60 FPS"
+        }
+      ]
+    },
+    {
+      "id": "mod-vid-4k-wildlife-escape",
+      "videoId": "vid-4k-wildlife-escape",
+      "videoTitle": "Wonders of Patagonia: Pristine Glaciers & Wildlife in Ultra HD (Full Documentary)",
+      "creatorName": "Earth Explorer 4K",
+      "overallScore": 99,
+      "status": "APPROVED",
+      "contentRating": "ALL_AGES",
+      "adEligibility": "MONETIZED_FULL",
+      "summary": "High-aesthetic educational documentary. Verified family-friendly and green-tier ad eligibility.",
+      "timestamp": "2026-09-09T18:01:20.000Z",
+      "categories": [
+        {
+          "category": "Violence & Gore",
+          "score": 100,
+          "flagged": false,
+          "notes": "Natural wildlife observation only"
+        },
+        {
+          "category": "Hate & Harassment",
+          "score": 100,
+          "flagged": false,
+          "notes": "None detected"
+        },
+        {
+          "category": "Explicit / Adult",
+          "score": 100,
+          "flagged": false,
+          "notes": "None detected"
+        },
+        {
+          "category": "Spam & Misleading",
+          "score": 99,
+          "flagged": false,
+          "notes": "High educational value"
+        },
+        {
+          "category": "Copyright & IP Integrity",
+          "score": 100,
+          "flagged": false,
+          "notes": "Royalty-free score & original camera files"
+        },
+        {
+          "category": "4K Technical Standards",
+          "score": 98,
+          "flagged": false,
+          "notes": "Genuine 4K UHD 60fps bitrate"
+        }
+      ]
+    },
+    {
+      "id": "mod-vid-4k-blender-bunny",
+      "videoId": "vid-4k-blender-bunny",
+      "videoTitle": "Big Buck Bunny: Enhanced 4K 60FPS Remastered Edition",
+      "creatorName": "Open Cinema Studio",
+      "overallScore": 100,
+      "status": "APPROVED",
+      "contentRating": "ALL_AGES",
+      "adEligibility": "MONETIZED_FULL",
+      "summary": "Verified open-source animated creative work. Exceptional family and community rating.",
+      "timestamp": "2026-09-05T10:16:00.000Z",
+      "categories": [
+        {
+          "category": "Violence & Gore",
+          "score": 100,
+          "flagged": false,
+          "notes": "Slapstick cartoon comedy only"
+        },
+        {
+          "category": "Hate & Harassment",
+          "score": 100,
+          "flagged": false,
+          "notes": "None detected"
+        },
+        {
+          "category": "Explicit / Adult",
+          "score": 100,
+          "flagged": false,
+          "notes": "None detected"
+        },
+        {
+          "category": "Spam & Misleading",
+          "score": 100,
+          "flagged": false,
+          "notes": "Authentic classic"
+        },
+        {
+          "category": "Copyright & IP Integrity",
+          "score": 100,
+          "flagged": false,
+          "notes": "Creative Commons 3.0 attribution compliant"
+        },
+        {
+          "category": "4K Technical Standards",
+          "score": 99,
+          "flagged": false,
+          "notes": "Crystal clear 4K 60fps"
+        }
+      ]
+    },
+    {
+      "id": "mod-vid-short-waterfall-drop",
+      "videoId": "vid-short-waterfall-drop",
+      "videoTitle": "Secret Hidden 4K Waterfall in Iceland 🌊 #Shorts #Nature #Travel",
+      "creatorName": "Earth Explorer 4K",
+      "overallScore": 100,
+      "status": "APPROVED",
+      "contentRating": "ALL_AGES",
+      "adEligibility": "MONETIZED_FULL",
+      "summary": "Shorts algorithm verified safe. High viewer retention signals. Monetized under Shorts Creator Pool.",
+      "timestamp": "2026-09-10T12:00:30.000Z",
+      "categories": [
+        {
+          "category": "Violence & Gore",
+          "score": 100,
+          "flagged": false,
+          "notes": "Safe nature"
+        },
+        {
+          "category": "Hate & Harassment",
+          "score": 100,
+          "flagged": false,
+          "notes": "Safe"
+        },
+        {
+          "category": "Explicit / Adult",
+          "score": 100,
+          "flagged": false,
+          "notes": "Safe"
+        },
+        {
+          "category": "Spam & Misleading",
+          "score": 99,
+          "flagged": false,
+          "notes": "Genuine short format"
+        },
+        {
+          "category": "Copyright & IP Integrity",
+          "score": 100,
+          "flagged": false,
+          "notes": "Original audio track"
+        },
+        {
+          "category": "4K Technical Standards",
+          "score": 98,
+          "flagged": false,
+          "notes": "Vertical 4K 9:16 aspect ratio verified"
+        }
+      ]
+    },
+    {
+      "id": "mod-vid-short-latte-mastery",
+      "videoId": "vid-short-latte-mastery",
+      "videoTitle": "World Champion Barista Latte Art in 15 Seconds ☕ #Shorts #Coffee",
+      "creatorName": "Artisan Crafts",
+      "overallScore": 100,
+      "status": "APPROVED",
+      "contentRating": "ALL_AGES",
+      "adEligibility": "MONETIZED_FULL",
+      "summary": "Verified wholesome culinary craftsmanship. Clean audio and family friendly.",
+      "timestamp": "2026-09-10T16:20:30.000Z",
+      "categories": [
+        {
+          "category": "Violence & Gore",
+          "score": 100,
+          "flagged": false,
+          "notes": "Zero"
+        },
+        {
+          "category": "Hate & Harassment",
+          "score": 100,
+          "flagged": false,
+          "notes": "Zero"
+        },
+        {
+          "category": "Explicit / Adult",
+          "score": 100,
+          "flagged": false,
+          "notes": "Zero"
+        },
+        {
+          "category": "Spam & Misleading",
+          "score": 100,
+          "flagged": false,
+          "notes": "Authentic craftsmanship"
+        },
+        {
+          "category": "Copyright & IP Integrity",
+          "score": 100,
+          "flagged": false,
+          "notes": "Original audio"
+        },
+        {
+          "category": "4K Technical Standards",
+          "score": 95,
+          "flagged": false,
+          "notes": "High-definition 60fps vertical"
+        }
+      ]
+    },
+    {
+      "id": "mod-vid-4k-scifi-elephants",
+      "videoId": "vid-4k-scifi-elephants",
+      "videoTitle": "Elephants Dream: Next-Gen 4K Remastered Open CGI Thriller",
+      "creatorName": "Open Cinema Studio",
+      "overallScore": 97,
+      "status": "APPROVED",
+      "contentRating": "TEEN_13",
+      "adEligibility": "MONETIZED_FULL",
+      "summary": "Sci-fi fantasy themes suitable for general and teen audiences. Cleared for full ad revenue.",
+      "timestamp": "2026-09-02T11:01:00.000Z",
+      "categories": [
+        {
+          "category": "Violence & Gore",
+          "score": 96,
+          "flagged": false,
+          "notes": "Stylized surreal mechanical fantasy"
+        },
+        {
+          "category": "Hate & Harassment",
+          "score": 100,
+          "flagged": false,
+          "notes": "Zero"
+        },
+        {
+          "category": "Explicit / Adult",
+          "score": 100,
+          "flagged": false,
+          "notes": "Zero"
+        },
+        {
+          "category": "Spam & Misleading",
+          "score": 98,
+          "flagged": false,
+          "notes": "True description"
+        },
+        {
+          "category": "Copyright & IP Integrity",
+          "score": 100,
+          "flagged": false,
+          "notes": "Creative Commons 2.5"
+        },
+        {
+          "category": "4K Technical Standards",
+          "score": 98,
+          "flagged": false,
+          "notes": "Native 4K rendering"
+        }
+      ]
+    }
+  ],
+  "creatorStats": {
+    "subscriberCount": 245000,
+    "subscriberGoal": 1000,
+    "watchHours": 18450,
+    "watchHoursGoal": 4000,
+    "isEligibleForYPP": true,
+    "isPartnerEnrolled": true,
+    "estimatedMonthlyEarnings": 3840.75,
+    "allTimeEarnings": 28450,
+    "superThanksEarnings": 4210,
+    "adEarnings": 24240,
+    "rpm": 8.92,
+    "cpm": 15.4,
+    "recentTransactions": [
+      {
+        "id": "tx-1",
+        "type": "super_thanks",
+        "amount": 25,
+        "fromUser": "Dr. Clara Thorne",
+        "videoTitle": "Wonders of Patagonia: Pristine Glaciers",
+        "date": "Today, 2:40 PM"
+      },
+      {
+        "id": "tx-2",
+        "type": "super_thanks",
+        "amount": 10,
+        "fromUser": "Elena Rostova",
+        "videoTitle": "Neon Odyssey: 4K 60FPS Cyberpunk Cinema Journey",
+        "date": "Yesterday, 8:15 PM"
+      },
+      {
+        "id": "tx-3",
+        "type": "ad_revenue",
+        "amount": 142.8,
+        "videoTitle": "Ad Pool Daily Distribution (4K High RPM Tier)",
+        "date": "Yesterday, 11:59 PM"
+      },
+      {
+        "id": "tx-4",
+        "type": "membership",
+        "amount": 4.99,
+        "fromUser": "Samir Patel",
+        "videoTitle": "Earth Explorer VIP Membership",
+        "date": "Yesterday, 3:10 PM"
+      }
+    ]
+  },
+  "directShares": [],
+  "subscriptions": {
+    "chan-cyberarts": true
+  }
+}

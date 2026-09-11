@@ -1,0 +1,6 @@
+{
+  "name": "Video Social & 4K Streaming Platform",
+  "description": "Full-featured video social media platform with 4K long-form video uploads, YouTube-style shorts, real-time likes, comments, direct sharing, creator monetization, and automated AI content moderation.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
