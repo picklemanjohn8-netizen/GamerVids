@@ -9,6 +9,8 @@ import { ProfilePage } from './components/ProfilePage';
 import { EditProfileModal } from './components/EditProfileModal';
 import { UploadModal } from './components/UploadModal';
 import { DirectShareModal } from './components/DirectShareModal';
+import { SavedVideosView } from './components/SavedVideosView';
+import { getLocalSavedVideoIds, saveLocalSavedVideoIds, toggleLocalSavedVideo } from './utils/savedStorage';
 import { VideoItem, UserProfile } from './types';
 import { Sparkles, CheckCircle2, Film, Flame, DollarSign, ShieldCheck } from 'lucide-react';
 
@@ -34,7 +36,7 @@ const DEFAULT_USER_PROFILE: UserProfile = {
 };
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<'home' | 'shorts' | 'studio' | 'moderation' | 'watch' | 'profile'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'shorts' | 'studio' | 'moderation' | 'watch' | 'profile' | 'saved'>('home');
   const [videos, setVideos] = useState<VideoItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);
@@ -45,6 +47,7 @@ export default function App() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   const [shareVideoTarget, setShareVideoTarget] = useState<VideoItem | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [savedVideoIds, setSavedVideoIds] = useState<string[]>(() => getLocalSavedVideoIds());
 
   // Active current user profile (customizable and persistent)
   const [userProfile, setUserProfile] = useState<UserProfile>(DEFAULT_USER_PROFILE);
@@ -67,6 +70,22 @@ export default function App() {
       }
     } catch (err) {
       console.error('Failed to load user profile:', err);
+    }
+  };
+
+  // Fetch persistent saved videos from server
+  const fetchSavedVideos = async () => {
+    try {
+      const res = await fetch('/api/user/saved-videos');
+      const data = await res.json();
+      if (data.success && Array.isArray(data.savedVideoIds)) {
+        const local = getLocalSavedVideoIds();
+        const merged = Array.from(new Set([...local, ...data.savedVideoIds]));
+        setSavedVideoIds(merged);
+        saveLocalSavedVideoIds(merged);
+      }
+    } catch (err) {
+      console.error('Failed to load saved videos from server:', err);
     }
   };
 
@@ -97,6 +116,7 @@ export default function App() {
 
   useEffect(() => {
     fetchUserProfile();
+    fetchSavedVideos();
     fetchVideos();
   }, []);
 
@@ -129,6 +149,38 @@ export default function App() {
 
   const handleUpdateVideo = (updated: VideoItem) => {
     setVideos(videos.map((v) => (v.id === updated.id ? updated : v)));
+  };
+
+  const handleToggleSaveVideo = async (videoId: string) => {
+    const isAlreadySaved = savedVideoIds.includes(videoId);
+    const newSaved = isAlreadySaved
+      ? savedVideoIds.filter((id) => id !== videoId)
+      : [videoId, ...savedVideoIds];
+
+    setSavedVideoIds(newSaved);
+    toggleLocalSavedVideo(videoId);
+
+    const target = videos.find((v) => v.id === videoId);
+    const title = target ? `"${target.title}"` : 'Video';
+
+    if (isAlreadySaved) {
+      showToast(`${title} removed from saved`);
+      fetch(`/api/user/saved-videos/${videoId}`, { method: 'DELETE' }).catch(() => {});
+    } else {
+      showToast(`${title} saved! Kept permanently on website`);
+      fetch('/api/user/saved-videos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ videoId }),
+      }).catch(() => {});
+    }
+  };
+
+  const handleClearSaved = async () => {
+    setSavedVideoIds([]);
+    saveLocalSavedVideoIds([]);
+    showToast('All saved videos cleared');
+    fetch('/api/user/saved-videos/clear', { method: 'POST' }).catch(() => {});
   };
 
   const handleUpdateProfile = (updated: UserProfile) => {
@@ -250,6 +302,7 @@ export default function App() {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
         onOpenUpload={() => setIsUploadOpen(true)}
+        savedCount={savedVideoIds.length}
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
         selectedCategory={selectedCategory}
@@ -309,6 +362,8 @@ export default function App() {
             {currentView === 'home' && (
               <HomeFeed
                 videos={videos}
+                savedVideoIds={savedVideoIds}
+                onToggleSave={handleToggleSaveVideo}
                 searchQuery={searchQuery}
                 onSelectVideo={handleSelectVideo}
                 onSelectShort={handleSelectShort}
@@ -322,6 +377,8 @@ export default function App() {
               <WatchView
                 video={activeVideo}
                 allVideos={videos}
+                isSaved={savedVideoIds.includes(activeVideo.id)}
+                onToggleSave={handleToggleSaveVideo}
                 onSelectVideo={handleSelectVideo}
                 currentUser={currentUser}
                 onUpdateVideo={handleUpdateVideo}
@@ -333,8 +390,27 @@ export default function App() {
             {currentView === 'shorts' && (
               <ShortsFeed
                 shorts={shortsList.length > 0 ? shortsList : videos}
+                savedVideoIds={savedVideoIds}
+                onToggleSave={handleToggleSaveVideo}
                 currentUser={currentUser}
                 onUpdateShort={handleUpdateVideo}
+              />
+            )}
+
+            {currentView === 'saved' && (
+              <SavedVideosView
+                videos={videos}
+                savedVideoIds={savedVideoIds}
+                onSelectVideo={handleSelectVideo}
+                onSelectShort={handleSelectShort}
+                onShareVideo={(v) => setShareVideoTarget(v)}
+                onToggleSave={handleToggleSaveVideo}
+                onClearSaved={handleClearSaved}
+                onNavigateHome={() => {
+                  setCurrentView('home');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                onSelectChannel={handleSelectChannel}
               />
             )}
 
@@ -358,6 +434,8 @@ export default function App() {
                 profile={selectedChannelProfile || userProfile}
                 isOwnProfile={!selectedChannelProfile || selectedChannelProfile.handle === userProfile.handle}
                 videos={videos}
+                savedVideoIds={savedVideoIds}
+                onToggleSave={handleToggleSaveVideo}
                 onSelectVideo={handleSelectVideo}
                 onSelectShort={handleSelectShort}
                 onShareVideo={(v) => setShareVideoTarget(v)}

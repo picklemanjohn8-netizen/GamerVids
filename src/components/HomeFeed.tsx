@@ -5,6 +5,8 @@ import { VideoCard } from './VideoCard';
 
 interface HomeFeedProps {
   videos: VideoItem[];
+  savedVideoIds?: string[];
+  onToggleSave?: (videoId: string) => void;
   searchQuery: string;
   onSelectVideo: (videoId: string) => void;
   onSelectShort: (videoId: string) => void;
@@ -26,6 +28,8 @@ const CATEGORY_CHIPS = [
 
 export const HomeFeed: React.FC<HomeFeedProps> = ({
   videos,
+  savedVideoIds = [],
+  onToggleSave,
   searchQuery,
   onSelectVideo,
   onSelectShort,
@@ -94,7 +98,7 @@ export const HomeFeed: React.FC<HomeFeedProps> = ({
         >
           <div className="aspect-[21/9] sm:aspect-[24/9] w-full relative">
             <img
-              src={longFormVideos[0].thumbnailUrl}
+              src={longFormVideos[0].thumbnailUrl || 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1200&auto=format&fit=crop'}
               alt={longFormVideos[0].title}
               className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
             />
@@ -148,7 +152,7 @@ export const HomeFeed: React.FC<HomeFeedProps> = ({
                 className="group relative aspect-[9/16] rounded-2xl overflow-hidden bg-neutral-900 border border-neutral-800 hover:border-amber-500/60 shadow-lg cursor-pointer transition-all duration-300"
               >
                 <img
-                  src={short.thumbnailUrl}
+                  src={short.thumbnailUrl || 'https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=600&auto=format&fit=crop'}
                   alt={short.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -201,6 +205,8 @@ export const HomeFeed: React.FC<HomeFeedProps> = ({
               <VideoCard
                 key={video.id}
                 video={video}
+                isSaved={savedVideoIds.includes(video.id)}
+                onToggleSave={onToggleSave}
                 onSelect={onSelectVideo}
                 onShare={onShareVideo}
                 onSelectChannel={onSelectChannel}

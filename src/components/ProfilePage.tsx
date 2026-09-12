@@ -30,22 +30,30 @@ interface ProfilePageProps {
   profile: UserProfile;
   isOwnProfile: boolean;
   videos: VideoItem[];
+  savedVideoIds?: string[];
+  onToggleSave?: (videoId: string) => void;
   onSelectVideo: (videoId: string) => void;
   onSelectShort: (videoId: string) => void;
+  onShareVideo?: (video: VideoItem) => void;
   onOpenUpload: () => void;
   onUpdateProfile: (updated: UserProfile) => void;
   onOpenStudio?: () => void;
+  onOpenEditModal?: () => void;
 }
 
 export const ProfilePage: React.FC<ProfilePageProps> = ({
   profile,
   isOwnProfile,
   videos,
+  savedVideoIds = [],
+  onToggleSave,
   onSelectVideo,
   onSelectShort,
+  onShareVideo,
   onOpenUpload,
   onUpdateProfile,
   onOpenStudio,
+  onOpenEditModal,
 }) => {
   const [activeTab, setActiveTab] = useState<'videos' | 'shorts' | 'about' | 'customize'>('videos');
   const [videoSort, setVideoSort] = useState<'latest' | 'views'>('latest');
@@ -104,7 +112,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
         {/* Banner */}
         <div className="relative aspect-[4/1] sm:aspect-[5/1] lg:aspect-[6/1] w-full overflow-hidden bg-neutral-950">
           <img
-            src={profile.bannerUrl}
+            src={profile.bannerUrl || 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1600&auto=format&fit=crop'}
             alt={profile.name}
             className="w-full h-full object-cover"
           />
@@ -135,7 +143,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
             <div className="flex flex-col sm:flex-row items-start sm:items-end gap-4">
               <div className="relative group">
                 <img
-                  src={profile.avatar}
+                  src={profile.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop'}
                   alt={profile.name}
                   className="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover ring-4 ring-neutral-900 shadow-2xl bg-neutral-950"
                 />
@@ -417,8 +425,10 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
                 <VideoCard
                   key={video.id}
                   video={video}
+                  isSaved={savedVideoIds.includes(video.id)}
+                  onToggleSave={onToggleSave}
                   onSelect={onSelectVideo}
-                  onShare={() => {}}
+                  onShare={onShareVideo || (() => {})}
                 />
               ))}
             </div>
@@ -453,7 +463,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
                   className="group relative aspect-[9/16] rounded-2xl overflow-hidden bg-neutral-900 border border-neutral-800 hover:border-amber-500/50 cursor-pointer shadow-md hover:shadow-xl transition-all"
                 >
                   <img
-                    src={short.thumbnailUrl}
+                    src={short.thumbnailUrl || 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=600&auto=format&fit=crop'}
                     alt={short.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />

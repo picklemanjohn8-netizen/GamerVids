@@ -116,6 +116,19 @@ export interface VideoItem {
   directSharesCount: number;
   is4KMaster: boolean;
   fileSizeMb: number;
+  isSaved?: boolean;
+  watchProgress?: {
+    timestamp: number;
+    duration: number;
+    updatedAt: string;
+  };
+}
+
+export interface WatchProgress {
+  videoId: string;
+  timestamp: number;
+  duration: number;
+  updatedAt: string;
 }
 
 export interface DirectSharePayload {

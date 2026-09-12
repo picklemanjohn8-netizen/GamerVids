@@ -1,10 +1,10 @@
 import express from 'express';
 import path from 'path';
 import fs from 'fs';
-import { fileURLToPath } from 'url';
 import { GoogleGenAI, Type } from '@google/genai';
 import { createServer as createViteServer } from 'vite';
 import dotenv from 'dotenv';
+import multer from 'multer';
 import {
   VideoItem,
   Comment,
@@ -17,12 +17,31 @@ import {
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const PORT = 3000;
 const DATA_DIR = path.join(process.cwd(), 'data');
 const DB_FILE = path.join(DATA_DIR, 'database.json');
+const UPLOAD_DIR = path.join(process.cwd(), 'public', 'uploads', 'videos');
+
+if (!fs.existsSync(UPLOAD_DIR)) {
+  fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+}
+
+// Configure persistent multer disk storage for uploaded videos
+const storage = multer.diskStorage({
+  destination: (_req, _file, cb) => {
+    cb(null, UPLOAD_DIR);
+  },
+  filename: (_req, file, cb) => {
+    const ext = path.extname(file.originalname) || '.mp4';
+    const base = path.basename(file.originalname, ext).replace(/[^a-zA-Z0-9_-]/g, '_');
+    cb(null, `video-${Date.now()}-${base}${ext}`);
+  },
+});
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 500 * 1024 * 1024 }, // 500MB
+});
 
 // Initialize Gemini Client
 const ai = new GoogleGenAI({
@@ -61,6 +80,8 @@ interface DatabaseSchema {
   }[];
   subscriptions: Record<string, boolean>; // channelId -> subscribed
   userProfile: UserProfile;
+  savedVideoIds: string[];
+  watchHistory: Record<string, { timestamp: number; duration: number; updatedAt: string }>;
 }
 
 const initialUserProfile: UserProfile = {
@@ -643,6 +664,8 @@ function loadDatabase(): DatabaseSchema {
         directShares: parsed.directShares || [],
         subscriptions: parsed.subscriptions || {},
         userProfile: parsed.userProfile || initialUserProfile,
+        savedVideoIds: parsed.savedVideoIds || ['vid-4k-cybercity'],
+        watchHistory: parsed.watchHistory || {},
       };
     } catch (e) {
       console.error('Error reading database, restoring defaults:', e);
@@ -669,6 +692,8 @@ function loadDatabase(): DatabaseSchema {
     directShares: [],
     subscriptions: { 'chan-cyberarts': true },
     userProfile: initialUserProfile,
+    savedVideoIds: ['vid-4k-cybercity'],
+    watchHistory: {},
   };
 
   saveDatabase(initialDb);
@@ -1101,6 +1126,18 @@ async function startServer() {
     }
   });
 
+  // Record a view count on a video
+  app.post('/api/videos/:id/view', (req, res) => {
+    const id = req.params.id;
+    const video = db.videos.find((v) => v.id === id);
+    if (video) {
+      video.views = (video.views || 0) + 1;
+      saveDatabase(db);
+      return res.json({ success: true, views: video.views });
+    }
+    res.status(404).json({ success: false, error: 'Video not found' });
+  });
+
   // Like or Dislike toggle on a video
   app.post('/api/videos/:id/like', (req, res) => {
     const id = req.params.id;
@@ -1378,6 +1415,14 @@ async function startServer() {
     });
   });
 
+  app.get('/api/monetization/stats', (req, res) => {
+    res.json({
+      success: true,
+      stats: db.creatorStats,
+      totalVideos: db.videos.length,
+    });
+  });
+
   // Moderation Audit Logs & Statistics
   app.get('/api/moderation/audit-log', (req, res) => {
     res.json({
@@ -1598,9 +1643,156 @@ async function startServer() {
       creatorStats: initialCreatorStats,
       directShares: [],
       subscriptions: { 'chan-cyberarts': true },
+      savedVideoIds: ['vid-4k-cybercity'],
+      watchHistory: {},
     };
     saveDatabase(db);
     res.json({ success: true, message: 'Database reset to default seed data' });
+  });
+
+  // Persistent Video File Upload API (saves uploaded video to server disk permanently)
+  app.post('/api/upload-video', upload.single('video'), (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ success: false, error: 'No video file provided' });
+      }
+      const relativeUrl = `/uploads/videos/${req.file.filename}`;
+      const fileSizeMb = Math.round((req.file.size / (1024 * 1024)) * 10) / 10 || 1;
+      res.json({
+        success: true,
+        videoUrl: relativeUrl,
+        fileName: req.file.originalname,
+        fileSizeMb,
+        message: 'Video file successfully uploaded and permanently saved on website server',
+      });
+    } catch (err: any) {
+      console.error('Video file upload error:', err);
+      res.status(500).json({ success: false, error: err.message || 'Video upload failed' });
+    }
+  });
+
+  // Get user's saved videos (persistent across sessions & devices)
+  app.get('/api/user/saved-videos', (_req, res) => {
+    const savedIds = db.savedVideoIds || [];
+    const savedList = savedIds
+      .map((id) => db.videos.find((v) => v.id === id))
+      .filter((v): v is VideoItem => Boolean(v));
+
+    res.json({
+      success: true,
+      savedVideoIds: savedIds,
+      savedVideos: savedList,
+      count: savedList.length,
+    });
+  });
+
+  // Save or unsave a video
+  app.post('/api/user/saved-videos', (req, res) => {
+    const { videoId } = req.body;
+    if (!videoId) {
+      return res.status(400).json({ success: false, error: 'videoId is required' });
+    }
+
+    if (!Array.isArray(db.savedVideoIds)) {
+      db.savedVideoIds = [];
+    }
+
+    const isAlreadySaved = db.savedVideoIds.includes(videoId);
+    if (isAlreadySaved) {
+      db.savedVideoIds = db.savedVideoIds.filter((id) => id !== videoId);
+    } else {
+      db.savedVideoIds = [videoId, ...db.savedVideoIds.filter((id) => id !== videoId)];
+    }
+
+    saveDatabase(db);
+
+    const savedList = db.savedVideoIds
+      .map((id) => db.videos.find((v) => v.id === id))
+      .filter((v): v is VideoItem => Boolean(v));
+
+    res.json({
+      success: true,
+      isSaved: !isAlreadySaved,
+      savedVideoIds: db.savedVideoIds,
+      savedVideos: savedList,
+      count: savedList.length,
+      message: !isAlreadySaved
+        ? 'Video saved to your website library (persists even when you leave)'
+        : 'Video removed from saved videos',
+    });
+  });
+
+  // Remove a video from saved list
+  app.delete('/api/user/saved-videos/:id', (req, res) => {
+    const id = req.params.id;
+    if (Array.isArray(db.savedVideoIds)) {
+      db.savedVideoIds = db.savedVideoIds.filter((vId) => vId !== id);
+      saveDatabase(db);
+    }
+
+    const savedList = (db.savedVideoIds || [])
+      .map((vId) => db.videos.find((v) => v.id === vId))
+      .filter((v): v is VideoItem => Boolean(v));
+
+    res.json({
+      success: true,
+      savedVideoIds: db.savedVideoIds || [],
+      savedVideos: savedList,
+      message: 'Video removed from saved videos',
+    });
+  });
+
+  // Clear all saved videos
+  app.post('/api/user/saved-videos/clear', (_req, res) => {
+    db.savedVideoIds = [];
+    saveDatabase(db);
+    res.json({
+      success: true,
+      savedVideoIds: [],
+      savedVideos: [],
+      message: 'All saved videos cleared',
+    });
+  });
+
+  // Get watch progress history
+  app.get('/api/user/watch-history', (_req, res) => {
+    res.json({
+      success: true,
+      history: db.watchHistory || {},
+    });
+  });
+
+  // Record / update watch playback progress
+  app.post('/api/user/watch-history', (req, res) => {
+    const { videoId, timestamp, duration } = req.body;
+    if (!videoId) {
+      return res.status(400).json({ success: false, error: 'videoId is required' });
+    }
+
+    if (!db.watchHistory) {
+      db.watchHistory = {};
+    }
+
+    const ts = Math.max(0, Math.floor(Number(timestamp) || 0));
+    const dur = Math.max(0, Math.floor(Number(duration) || 0));
+
+    if (dur > 0 && ts / dur >= 0.95) {
+      // Completed, remove progress record
+      delete db.watchHistory[videoId];
+    } else if (ts > 3) {
+      db.watchHistory[videoId] = {
+        timestamp: ts,
+        duration: dur,
+        updatedAt: new Date().toISOString(),
+      };
+    }
+
+    saveDatabase(db);
+
+    res.json({
+      success: true,
+      savedProgress: db.watchHistory[videoId] || null,
+    });
   });
 
   // Serve public directory statically (for local 4K video streams, avatars, banners)

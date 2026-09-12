@@ -1112,5 +1112,9 @@
   "directShares": [],
   "subscriptions": {
     "chan-cyberarts": true
-  }
+  },
+  "savedVideoIds": [
+    "vid-4k-cybercity"
+  ],
+  "watchHistory": {}
 }

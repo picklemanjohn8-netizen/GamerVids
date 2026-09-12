@@ -15,6 +15,7 @@ import {
   Flame,
   ShieldCheck,
   Loader2,
+  Bookmark,
 } from 'lucide-react';
 import { VideoItem, Comment } from '../types';
 import { DirectShareModal } from './DirectShareModal';
@@ -23,12 +24,16 @@ import { CommentsSection } from './CommentsSection';
 
 interface ShortsFeedProps {
   shorts: VideoItem[];
+  savedVideoIds?: string[];
+  onToggleSave?: (videoId: string) => void;
   currentUser: { name: string; handle: string; avatar: string };
   onUpdateShort: (updated: VideoItem) => void;
 }
 
 export const ShortsFeed: React.FC<ShortsFeedProps> = ({
   shorts,
+  savedVideoIds = [],
+  onToggleSave,
   currentUser,
   onUpdateShort,
 }) => {
@@ -40,11 +45,12 @@ export const ShortsFeed: React.FC<ShortsFeedProps> = ({
   const [showComments, setShowComments] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
   const [showSuperThanks, setShowSuperThanks] = useState(false);
-  const [shortVideoSrc, setShortVideoSrc] = useState('');
+  const currentShort = shorts[currentIndex] || shorts[0];
+  const [shortVideoSrc, setShortVideoSrc] = useState<string>(
+    currentShort?.videoUrl || '/videos/nature_short.mp4'
+  );
 
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  const currentShort = shorts[currentIndex];
 
   useEffect(() => {
     if (!currentShort) return;
@@ -223,8 +229,8 @@ export const ShortsFeed: React.FC<ShortsFeedProps> = ({
           {/* Video */}
           <video
             ref={videoRef}
-            src={shortVideoSrc}
-            poster={currentShort.thumbnailUrl}
+            src={shortVideoSrc || undefined}
+            poster={currentShort?.thumbnailUrl || undefined}
             loop
             autoPlay
             playsInline
@@ -297,7 +303,7 @@ export const ShortsFeed: React.FC<ShortsFeedProps> = ({
             {/* Creator Row */}
             <div className="flex items-center gap-2.5">
               <img
-                src={currentShort.creator.avatar}
+                src={currentShort.creator.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop'}
                 alt={currentShort.creator.name}
                 className="w-9 h-9 rounded-full object-cover ring-2 ring-red-500"
               />
@@ -383,6 +389,28 @@ export const ShortsFeed: React.FC<ShortsFeedProps> = ({
             </div>
             <span className="text-[11px] font-bold text-amber-300">Tip</span>
           </button>
+
+          {/* Save to Website Library */}
+          {currentShort && (
+            <button
+              onClick={() => onToggleSave?.(currentShort.id)}
+              className="flex flex-col items-center gap-1 group cursor-pointer"
+              title={savedVideoIds.includes(currentShort.id) ? 'Saved to website (click to remove)' : 'Save video on website'}
+            >
+              <div
+                className={`w-12 h-12 rounded-full flex items-center justify-center border transition-all ${
+                  savedVideoIds.includes(currentShort.id)
+                    ? 'bg-red-600 border-red-500 text-white shadow-lg shadow-red-900/40 scale-105'
+                    : 'bg-neutral-900/90 border-neutral-800 text-neutral-200 hover:bg-neutral-800 hover:scale-110'
+                }`}
+              >
+                <Bookmark className={`w-5 h-5 ${savedVideoIds.includes(currentShort.id) ? 'fill-current text-white' : ''}`} />
+              </div>
+              <span className="text-[11px] font-bold">
+                {savedVideoIds.includes(currentShort.id) ? 'Saved' : 'Save'}
+              </span>
+            </button>
+          )}
 
           {/* Up & Down Scroll Controls */}
           <div className="flex flex-col gap-1 pt-4 border-t border-neutral-800">

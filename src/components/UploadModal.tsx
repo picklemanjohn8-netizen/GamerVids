@@ -55,6 +55,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
   const [step, setStep] = useState<'upload' | 'details' | 'moderation' | 'monetization'>('upload');
 
   // Video data state
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [format, setFormat] = useState<'long-form' | 'shorts'>('long-form');
   const [videoUrl, setVideoUrl] = useState('');
   const [title, setTitle] = useState('');
@@ -90,6 +91,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
     const file = e.target.files?.[0];
     if (!file) return;
 
+    setSelectedFile(file);
     const localUrl = URL.createObjectURL(file);
     setVideoUrl(localUrl);
     setTitle(file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' '));
@@ -127,6 +129,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
   };
 
   const handleSelectPreset = (preset: typeof PRESET_4K_SOURCES[0]) => {
+    setSelectedFile(null);
     setVideoUrl(preset.url);
     setTitle(preset.title);
     setThumbnailUrl(preset.thumbnail);
@@ -188,6 +191,26 @@ export const UploadModal: React.FC<UploadModalProps> = ({
     const tags = tagsInput.split(',').map((t) => t.trim()).filter(Boolean);
 
     try {
+      let resolvedVideoUrl = videoUrl;
+
+      // If a physical video file was selected, upload it to permanent server storage
+      if (selectedFile) {
+        try {
+          const formData = new FormData();
+          formData.append('video', selectedFile);
+          const uploadRes = await fetch('/api/upload-video', {
+            method: 'POST',
+            body: formData,
+          });
+          const uploadData = await uploadRes.json();
+          if (uploadData.success && uploadData.videoUrl) {
+            resolvedVideoUrl = uploadData.videoUrl;
+          }
+        } catch (uploadErr) {
+          console.warn('Physical video upload fallback:', uploadErr);
+        }
+      }
+
       const res = await fetch('/api/videos', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -195,7 +218,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
           title,
           description,
           format,
-          videoUrl,
+          videoUrl: resolvedVideoUrl,
           maxResolution,
           fps,
           aspectRatio: format === 'shorts' ? '9:16' : '16:9',

@@ -93,6 +93,22 @@ export const CommentsSection: React.FC<CommentsSectionProps> = ({
     }
   };
 
+  const handleLikeComment = async (commentId: string) => {
+    try {
+      const res = await fetch(`/api/comments/${commentId}/like`, { method: 'POST' });
+      const data = await res.json();
+      if (data.success) {
+        // Optimistically update comment in list
+        const updated = comments.map((c) => (c.id === commentId ? { ...c, likes: data.likes } : c));
+        // Also trigger parent callback if available
+        const target = updated.find((c) => c.id === commentId);
+        if (target) onCommentAdded(target);
+      }
+    } catch (err) {
+      console.error('Error liking comment:', err);
+    }
+  };
+
   const sortedComments = [...comments].sort((a, b) => {
     // Super thanks comments always stick near top
     if (a.isSuperThanks && !b.isSuperThanks) return -1;
@@ -136,7 +152,7 @@ export const CommentsSection: React.FC<CommentsSectionProps> = ({
       <form onSubmit={handleSubmitComment} className="space-y-3">
         <div className="flex items-start gap-3">
           <img
-            src={currentUser.avatar}
+            src={currentUser.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop'}
             alt={currentUser.name}
             className="w-9 h-9 rounded-full object-cover ring-1 ring-neutral-700 shrink-0"
           />
@@ -198,7 +214,7 @@ export const CommentsSection: React.FC<CommentsSectionProps> = ({
           >
             <div className="flex items-start gap-3">
               <img
-                src={comment.userAvatar}
+                src={comment.userAvatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop'}
                 alt={comment.userName}
                 className={`w-8 h-8 rounded-full object-cover shrink-0 ${
                   comment.isSuperThanks ? 'ring-2 ring-amber-500' : 'ring-1 ring-neutral-700'
@@ -229,7 +245,11 @@ export const CommentsSection: React.FC<CommentsSectionProps> = ({
 
                 {/* Actions */}
                 <div className="flex items-center gap-4 mt-2.5 text-xs text-neutral-400">
-                  <button className="flex items-center gap-1 hover:text-white transition-colors cursor-pointer">
+                  <button
+                    onClick={() => handleLikeComment(comment.id)}
+                    className="flex items-center gap-1 hover:text-white transition-colors cursor-pointer"
+                    title="Like comment"
+                  >
                     <ThumbsUp className="w-3.5 h-3.5" />
                     <span>{comment.likes || 0}</span>
                   </button>
@@ -275,7 +295,7 @@ export const CommentsSection: React.FC<CommentsSectionProps> = ({
                       <div key={rep.id} className="flex items-start gap-2.5">
                         <CornerDownRight className="w-3.5 h-3.5 text-neutral-500 shrink-0 mt-1" />
                         <img
-                          src={rep.userAvatar}
+                          src={rep.userAvatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop'}
                           alt={rep.userName}
                           className="w-6 h-6 rounded-full object-cover shrink-0"
                         />

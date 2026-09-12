@@ -16,12 +16,14 @@ import {
   Edit3,
   AtSign,
   SlidersHorizontal,
+  Bookmark,
 } from 'lucide-react';
 
 interface NavbarProps {
-  currentView: 'home' | 'shorts' | 'studio' | 'moderation' | 'profile';
-  onViewChange: (view: 'home' | 'shorts' | 'studio' | 'moderation' | 'profile') => void;
+  currentView: 'home' | 'shorts' | 'studio' | 'moderation' | 'profile' | 'saved';
+  onViewChange: (view: 'home' | 'shorts' | 'studio' | 'moderation' | 'profile' | 'saved') => void;
   onOpenUpload: () => void;
+  savedCount?: number;
   searchQuery: string;
   onSearchChange: (q: string) => void;
   selectedCategory: string;
@@ -57,6 +59,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   currentView,
   onViewChange,
   onOpenUpload,
+  savedCount = 0,
   searchQuery,
   onSearchChange,
   currentUser,
@@ -139,6 +142,23 @@ export const Navbar: React.FC<NavbarProps> = ({
             Shorts
           </button>
           <button
+            onClick={() => onViewChange('saved')}
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer relative ${
+              currentView === 'saved'
+                ? 'bg-neutral-800 text-white shadow-sm'
+                : 'text-neutral-400 hover:text-white hover:bg-neutral-800/40'
+            }`}
+            title="Saved videos & watch later"
+          >
+            <Bookmark className={`w-3.5 h-3.5 ${currentView === 'saved' ? 'fill-current text-rose-400' : 'text-rose-400'}`} />
+            <span>Saved</span>
+            {savedCount > 0 && (
+              <span className="ml-0.5 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.2 rounded-full">
+                {savedCount}
+              </span>
+            )}
+          </button>
+          <button
             onClick={() => onViewChange('studio')}
             className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
               currentView === 'studio'
@@ -193,7 +213,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               title="User profile menu & customizer"
             >
               <img
-                src={currentUser.avatar}
+                src={currentUser.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop'}
                 alt={currentUser.name}
                 className="w-8 h-8 rounded-lg object-cover ring-1 ring-red-500/40"
               />
@@ -209,7 +229,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <div className="px-3 py-2.5 border-b border-neutral-800/80 bg-neutral-950/60 rounded-xl mb-1.5">
                   <div className="flex items-center gap-2.5">
                     <img
-                      src={currentUser.avatar}
+                      src={currentUser.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop'}
                       alt={currentUser.name}
                       className="w-10 h-10 rounded-full object-cover ring-2 ring-red-500/50"
                     />
@@ -286,7 +306,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                           : 'text-neutral-400 hover:text-white hover:bg-neutral-800/50'
                       }`}
                     >
-                      <img src={user.avatar} alt={user.name} className="w-5 h-5 rounded-full object-cover" />
+                      <img src={user.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop'} alt={user.name} className="w-5 h-5 rounded-full object-cover" />
                       <div className="truncate flex-1">
                         <span className="truncate block">{user.name}</span>
                         <span className="text-[10px] text-neutral-500 font-mono block">{user.handle}</span>
@@ -344,6 +364,25 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <Flame className="w-4 h-4 text-amber-400" />
               Shorts
+            </button>
+            <button
+              onClick={() => {
+                onViewChange('saved');
+                setShowMobileNav(false);
+              }}
+              className={`p-2.5 rounded-lg text-xs font-semibold flex items-center justify-between ${
+                currentView === 'saved' ? 'bg-neutral-800 text-white' : 'text-neutral-400 bg-neutral-900'
+              }`}
+            >
+              <span className="flex items-center gap-2">
+                <Bookmark className="w-4 h-4 text-rose-400" />
+                Saved Videos
+              </span>
+              {savedCount > 0 && (
+                <span className="bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                  {savedCount}
+                </span>
+              )}
             </button>
             <button
               onClick={() => {

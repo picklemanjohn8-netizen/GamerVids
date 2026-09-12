@@ -66,7 +66,7 @@ export const CreatorStudio: React.FC<CreatorStudioProps> = ({
       <div className="flex flex-wrap items-center justify-between gap-4 p-6 bg-gradient-to-r from-neutral-900 via-neutral-900 to-amber-950/30 border border-neutral-800 rounded-3xl shadow-xl">
         <div className="flex items-center gap-4">
           <img
-            src={currentUser.avatar}
+            src={currentUser.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop'}
             alt={currentUser.name}
             className="w-16 h-16 rounded-2xl object-cover ring-2 ring-red-500/50 shadow-lg"
           />
@@ -300,7 +300,7 @@ export const CreatorStudio: React.FC<CreatorStudioProps> = ({
                 >
                   <td className="px-6 py-3 flex items-center gap-3">
                     <img
-                      src={vid.thumbnailUrl}
+                      src={vid.thumbnailUrl || 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=600&auto=format&fit=crop'}
                       alt={vid.title}
                       className="w-16 h-10 rounded-lg object-cover border border-neutral-800 shrink-0"
                     />

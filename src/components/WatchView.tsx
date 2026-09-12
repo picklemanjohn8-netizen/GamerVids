@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   ThumbsUp,
   ThumbsDown,
@@ -15,6 +15,7 @@ import {
   ListPlus,
   Flag,
   Flame,
+  Bookmark,
 } from 'lucide-react';
 import { VideoItem, Comment } from '../types';
 import { VideoPlayer } from './VideoPlayer';
@@ -22,10 +23,13 @@ import { CommentsSection } from './CommentsSection';
 import { DirectShareModal } from './DirectShareModal';
 import { SuperThanksModal } from './SuperThanksModal';
 import { ModerationModal } from './ModerationModal';
+import { getLocalVideoProgress, setLocalWatchProgress } from '../utils/savedStorage';
 
 interface WatchViewProps {
   video: VideoItem;
   allVideos: VideoItem[];
+  isSaved?: boolean;
+  onToggleSave?: (videoId: string) => void;
   onSelectVideo: (videoId: string) => void;
   currentUser: { name: string; handle: string; avatar: string };
   onUpdateVideo: (updated: VideoItem) => void;
@@ -36,6 +40,8 @@ interface WatchViewProps {
 export const WatchView: React.FC<WatchViewProps> = ({
   video,
   allVideos,
+  isSaved = false,
+  onToggleSave,
   onSelectVideo,
   currentUser,
   onUpdateVideo,
@@ -45,12 +51,58 @@ export const WatchView: React.FC<WatchViewProps> = ({
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isTheatreMode, setIsTheatreMode] = useState(false);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
-  const [currentTime, setCurrentTime] = useState(initialTime);
+  
+  // Check if there is a saved resume position
+  const effectiveInitialTime = useRef(
+    initialTime > 0 ? initialTime : (getLocalVideoProgress(video.id) || 0)
+  ).current;
+
+  const [currentTime, setCurrentTime] = useState(effectiveInitialTime);
   const [showShareModal, setShowShareModal] = useState(false);
   const [showSuperThanksModal, setShowSuperThanksModal] = useState(false);
   const [showModerationModal, setShowModerationModal] = useState(false);
   const [showJoinModal, setShowJoinModal] = useState(false);
   const [isMember, setIsMember] = useState(false);
+  const lastSavedTimeRef = useRef(0);
+
+  // Periodically persist playback progress to ensure resume works when leaving website
+  const handleTimeUpdate = (time: number) => {
+    setCurrentTime(time);
+    const now = Math.floor(time);
+    // Save every 4 seconds of playback progress
+    if (Math.abs(now - lastSavedTimeRef.current) >= 4) {
+      lastSavedTimeRef.current = now;
+      setLocalWatchProgress(video.id, now, video.duration);
+      // Sync to server backend asynchronously
+      fetch('/api/user/watch-history', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          videoId: video.id,
+          timestamp: now,
+          duration: video.duration,
+        }),
+      }).catch(() => {});
+    }
+  };
+
+  // Save on component unmount (e.g. navigation away)
+  useEffect(() => {
+    return () => {
+      if (currentTime > 3) {
+        setLocalWatchProgress(video.id, currentTime, video.duration);
+        fetch('/api/user/watch-history', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            videoId: video.id,
+            timestamp: currentTime,
+            duration: video.duration,
+          }),
+        }).catch(() => {});
+      }
+    };
+  }, [video.id, currentTime, video.duration]);
 
   const handleLike = async (action: 'like' | 'dislike') => {
     try {
@@ -145,8 +197,8 @@ export const WatchView: React.FC<WatchViewProps> = ({
           {/* Custom 4K Player */}
           <VideoPlayer
             video={video}
-            initialTime={initialTime}
-            onTimeUpdate={setCurrentTime}
+            initialTime={effectiveInitialTime}
+            onTimeUpdate={handleTimeUpdate}
             isTheatreMode={isTheatreMode}
             onToggleTheatre={() => setIsTheatreMode(!isTheatreMode)}
             onVideoEnd={() => {
@@ -180,7 +232,7 @@ export const WatchView: React.FC<WatchViewProps> = ({
             {/* Creator Profile */}
             <div className="flex items-center gap-3">
               <img
-                src={video.creator.avatar}
+                src={video.creator.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop'}
                 alt={video.creator.name}
                 onClick={() => onSelectChannel?.(video.creator.handle)}
                 className={`w-10 h-10 rounded-full object-cover ring-2 ring-red-500/40 transition-all ${
@@ -272,6 +324,20 @@ export const WatchView: React.FC<WatchViewProps> = ({
               >
                 <Share2 className="w-3.5 h-3.5 text-rose-400" />
                 <span>Share ({video.shares})</span>
+              </button>
+
+              {/* Save Video to Website Library Button */}
+              <button
+                onClick={() => onToggleSave?.(video.id)}
+                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold border transition-all cursor-pointer ${
+                  isSaved
+                    ? 'bg-red-600/25 border-red-500/50 text-red-400 hover:bg-red-600/35 shadow-sm'
+                    : 'bg-neutral-900 hover:bg-neutral-800 border-neutral-800 text-neutral-300 hover:text-white'
+                }`}
+                title={isSaved ? 'Saved to website (persists when you leave)' : 'Save video on website'}
+              >
+                <Bookmark className={`w-3.5 h-3.5 ${isSaved ? 'fill-current text-red-400' : ''}`} />
+                <span>{isSaved ? 'Saved' : 'Save'}</span>
               </button>
 
               {/* Creator Monetization Super Thanks Button */}
@@ -387,7 +453,7 @@ export const WatchView: React.FC<WatchViewProps> = ({
                 {/* Thumbnail */}
                 <div className="relative w-40 h-24 rounded-lg overflow-hidden shrink-0 bg-neutral-950 border border-neutral-800">
                   <img
-                    src={rec.thumbnailUrl}
+                    src={rec.thumbnailUrl || 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=600&auto=format&fit=crop'}
                     alt={rec.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />

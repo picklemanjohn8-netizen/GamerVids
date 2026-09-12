@@ -397,7 +397,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({
                 <div className="flex flex-wrap items-center gap-4 p-4 bg-neutral-950/80 rounded-2xl border border-neutral-800">
                   <div className="relative group">
                     <img
-                      src={avatar}
+                      src={avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop'}
                       alt={name}
                       className="w-20 h-20 rounded-full object-cover ring-2 ring-red-500/50 shadow-md"
                     />
@@ -470,7 +470,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({
                 <label className="block text-xs font-bold text-white">4K Channel Header Banner</label>
                 <div className="relative aspect-[3/1] w-full rounded-2xl overflow-hidden bg-neutral-950 border border-neutral-800 group shadow-md">
                   <img
-                    src={bannerUrl}
+                    src={bannerUrl || 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1600&auto=format&fit=crop'}
                     alt="Channel Banner Preview"
                     className="w-full h-full object-cover"
                   />
@@ -639,7 +639,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({
             </span>
             <div className="flex items-center gap-3">
               <img
-                src={avatar}
+                src={avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop'}
                 alt={name}
                 className="w-10 h-10 rounded-full object-cover ring-2 ring-red-500/50"
               />

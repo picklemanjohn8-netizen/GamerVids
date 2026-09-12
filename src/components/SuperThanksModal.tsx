@@ -114,7 +114,7 @@ export const SuperThanksModal: React.FC<SuperThanksModalProps> = ({
             {/* Creator Card */}
             <div className="flex items-center gap-3 p-3 bg-neutral-950 rounded-xl border border-neutral-800">
               <img
-                src={video.creator.avatar}
+                src={video.creator.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop'}
                 alt={video.creator.name}
                 className="w-10 h-10 rounded-full object-cover ring-2 ring-amber-500/40"
               />

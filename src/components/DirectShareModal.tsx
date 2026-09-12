@@ -171,7 +171,7 @@ export const DirectShareModal: React.FC<DirectShareModalProps> = ({
         {/* Video preview mini bar */}
         <div className="px-6 py-3 bg-neutral-950/60 border-b border-neutral-800/80 flex items-center gap-3">
           <img
-            src={video.thumbnailUrl}
+            src={video.thumbnailUrl || 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=600&auto=format&fit=crop'}
             alt={video.title}
             className="w-16 h-10 rounded-lg object-cover border border-neutral-800 shrink-0"
           />

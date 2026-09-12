@@ -318,8 +318,8 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
       {/* Native Video Element */}
       <video
         ref={videoRef}
-        src={videoSrc}
-        poster={video.thumbnailUrl}
+        src={videoSrc || DEFAULT_FALLBACK_VIDEO}
+        poster={video.thumbnailUrl || undefined}
         onClick={togglePlay}
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleLoadedMetadata}
