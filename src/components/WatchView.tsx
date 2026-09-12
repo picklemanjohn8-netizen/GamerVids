@@ -51,6 +51,8 @@ export const WatchView: React.FC<WatchViewProps> = ({
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isTheatreMode, setIsTheatreMode] = useState(false);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [isLoadingComments, setIsLoadingComments] = useState(false);
   
   // Check if there is a saved resume position
   const effectiveInitialTime = useRef(
@@ -64,6 +66,44 @@ export const WatchView: React.FC<WatchViewProps> = ({
   const [showJoinModal, setShowJoinModal] = useState(false);
   const [isMember, setIsMember] = useState(false);
   const lastSavedTimeRef = useRef(0);
+
+  // Load real comments from database on video change
+  useEffect(() => {
+    let isCancelled = false;
+    setIsLoadingComments(true);
+    fetch(`/api/videos/${video.id}/comments`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (!isCancelled && data.success && Array.isArray(data.comments)) {
+          setComments(data.comments);
+        }
+      })
+      .catch((err) => console.error('Failed to load comments:', err))
+      .finally(() => {
+        if (!isCancelled) setIsLoadingComments(false);
+      });
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [video.id]);
+
+  // Check subscription status on creator change
+  useEffect(() => {
+    let isCancelled = false;
+    fetch('/api/channel/subscriptions')
+      .then((res) => res.json())
+      .then((data) => {
+        if (!isCancelled && data.success && data.subscriptions) {
+          setIsSubscribed(Boolean(data.subscriptions[video.creator.id]));
+        }
+      })
+      .catch(() => {});
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [video.creator.id]);
 
   // Periodically persist playback progress to ensure resume works when leaving website
   const handleTimeUpdate = (time: number) => {
@@ -136,6 +176,13 @@ export const WatchView: React.FC<WatchViewProps> = ({
       const data = await res.json();
       if (data.success) {
         setIsSubscribed(data.isSubscribed);
+        onUpdateVideo({
+          ...video,
+          creator: {
+            ...video.creator,
+            subscribers: Math.max(0, video.creator.subscribers + (data.isSubscribed ? 1 : -1)),
+          },
+        });
       }
     } catch (err) {
       console.error('Subscribe failed:', err);
@@ -143,19 +190,58 @@ export const WatchView: React.FC<WatchViewProps> = ({
   };
 
   const handleCommentAdded = (newComment: Comment) => {
+    setComments((prev) => {
+      // Check if it is a reply to an existing comment
+      const parentIndex = prev.findIndex((c) =>
+        c.replies?.some((r) => r.id === newComment.id) ||
+        (newComment as any).parentCommentId === c.id
+      );
+
+      if (parentIndex !== -1) {
+        const copy = [...prev];
+        const parent = { ...copy[parentIndex] };
+        if (!parent.replies) parent.replies = [];
+        if (!parent.replies.some((r) => r.id === newComment.id)) {
+          parent.replies = [...parent.replies, newComment];
+        }
+        copy[parentIndex] = parent;
+        return copy;
+      }
+
+      // Check if already in comments list (e.g. liked or existing)
+      if (prev.some((c) => c.id === newComment.id)) {
+        return prev.map((c) => (c.id === newComment.id ? newComment : c));
+      }
+
+      return [newComment, ...prev];
+    });
+
     onUpdateVideo({
       ...video,
       commentsCount: video.commentsCount + 1,
     });
   };
 
-  const handleSuperThanksSuccess = (amount: number, newTotal: number) => {
+  const handleSuperThanksSuccess = (amount: number, _newTotal: number, comment?: Comment) => {
+    if (comment) {
+      setComments((prev) => [comment, ...prev]);
+    } else {
+      // Refresh comments from API to catch the new super thanks comment
+      fetch(`/api/videos/${video.id}/comments`)
+        .then((r) => r.json())
+        .then((d) => {
+          if (d.success && Array.isArray(d.comments)) setComments(d.comments);
+        })
+        .catch(() => {});
+    }
+
     onUpdateVideo({
       ...video,
+      commentsCount: video.commentsCount + 1,
       adSettings: video.adSettings
         ? {
             ...video.adSettings,
-            estimatedEarnings: video.adSettings.estimatedEarnings + amount,
+            estimatedEarnings: (video.adSettings.estimatedEarnings || 0) + amount,
           }
         : undefined,
     });
@@ -425,7 +511,7 @@ export const WatchView: React.FC<WatchViewProps> = ({
           {/* Comments Section */}
           <CommentsSection
             videoId={video.id}
-            comments={[]}
+            comments={comments}
             currentUser={currentUser}
             onCommentAdded={handleCommentAdded}
             onOpenSuperThanks={() => setShowSuperThanksModal(true)}

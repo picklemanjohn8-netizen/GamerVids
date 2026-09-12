@@ -25,6 +25,7 @@ import {
 import { UserProfile, VideoItem } from '../types';
 import { VideoCard } from './VideoCard';
 import { EditProfileModal } from './EditProfileModal';
+import { copyToClipboard } from '../utils/clipboard';
 
 interface ProfilePageProps {
   profile: UserProfile;
@@ -88,9 +89,9 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
   const totalChannelViews = channelVideos.reduce((acc, v) => acc + (v.views || 0), 0);
   const totalLikes = channelVideos.reduce((acc, v) => acc + (v.likes || 0), 0);
 
-  const handleShareChannel = () => {
+  const handleShareChannel = async () => {
     const url = window.location.origin + '?channel=' + encodeURIComponent(profile.handle);
-    navigator.clipboard.writeText(url);
+    await copyToClipboard(url);
     setCopiedLink(true);
     setTimeout(() => setCopiedLink(false), 3000);
   };

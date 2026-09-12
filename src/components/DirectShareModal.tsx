@@ -13,6 +13,7 @@ import {
   Clock,
 } from 'lucide-react';
 import { VideoItem, DirectSharePayload } from '../types';
+import { copyToClipboard } from '../utils/clipboard';
 
 interface DirectShareModalProps {
   video: VideoItem;
@@ -55,7 +56,7 @@ export const DirectShareModal: React.FC<DirectShareModalProps> = ({
 
   const handleCopyLink = async () => {
     try {
-      await navigator.clipboard.writeText(shareableUrl);
+      await copyToClipboard(shareableUrl);
       setCopiedLink(true);
       setTimeout(() => setCopiedLink(false), 2500);
 
@@ -81,7 +82,7 @@ export const DirectShareModal: React.FC<DirectShareModalProps> = ({
 
   const handleCopyEmbed = async () => {
     try {
-      await navigator.clipboard.writeText(embedCode);
+      await copyToClipboard(embedCode);
       setCopiedEmbed(true);
       setTimeout(() => setCopiedEmbed(false), 2500);
 

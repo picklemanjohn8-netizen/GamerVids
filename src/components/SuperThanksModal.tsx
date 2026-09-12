@@ -7,7 +7,7 @@ interface SuperThanksModalProps {
   isOpen: boolean;
   onClose: () => void;
   currentUser: { name: string; avatar: string };
-  onSuccess: (amount: number, newTotal: number) => void;
+  onSuccess: (amount: number, newTotal: number, comment?: any) => void;
 }
 
 const TIER_OPTIONS = [
@@ -56,7 +56,7 @@ export const SuperThanksModal: React.FC<SuperThanksModalProps> = ({
       const data = await res.json();
       if (data.success) {
         setCompleted(true);
-        onSuccess(currentAmount, data.newTotal);
+        onSuccess(currentAmount, data.newTotal, data.comment);
         setTimeout(() => {
           setCompleted(false);
           onClose();

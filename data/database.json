@@ -124,7 +124,7 @@
           }
         ]
       },
-      "commentsCount": 14,
+      "commentsCount": 16,
       "directSharesCount": 68,
       "is4KMaster": true,
       "fileSizeMb": 1240
@@ -152,7 +152,7 @@
         "name": "Earth Explorer 4K",
         "handle": "@earthexplorer",
         "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
-        "subscribers": 512000,
+        "subscribers": 512001,
         "isVerified": true,
         "isPartner": true,
         "totalEarnings": 14200,
@@ -398,7 +398,7 @@
         "name": "Earth Explorer 4K",
         "handle": "@earthexplorer",
         "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
-        "subscribers": 512000,
+        "subscribers": 512001,
         "isVerified": true,
         "isPartner": true
       },
@@ -673,6 +673,32 @@
   "comments": {
     "vid-4k-cybercity": [
       {
+        "id": "st-com-1789206767900",
+        "videoId": "vid-4k-cybercity",
+        "userId": "user-donor-1789206767900",
+        "userName": "Alex Rivers",
+        "userAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150&auto=format&fit=crop",
+        "content": "Outstanding cinema work!",
+        "timestamp": "Just now",
+        "likes": 1,
+        "isSuperThanks": true,
+        "superThanksAmount": 5,
+        "isCreatorHearted": true
+      },
+      {
+        "id": "com-1789206764318",
+        "videoId": "vid-4k-cybercity",
+        "userId": "user-1789206764318",
+        "userName": "Alex Rivers",
+        "userAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
+        "content": "Incredible native 4K 60fps fidelity on this platform!",
+        "timestamp": "Just now",
+        "likes": 0,
+        "isLikedByUser": false,
+        "isSuperThanks": false,
+        "moderationScore": 100
+      },
+      {
         "id": "com-1",
         "videoId": "vid-4k-cybercity",
         "userId": "user-marcus",
@@ -680,8 +706,8 @@
         "userAvatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop",
         "content": "The color grading on those neon billboards at 0:45 in native 4K 60fps on an OLED screen is pure art! Hats off to the lighting crew.",
         "timestamp": "2 days ago",
-        "likes": 184,
-        "isLikedByUser": false,
+        "likes": 185,
+        "isLikedByUser": true,
         "isCreatorHearted": true,
         "replies": [
           {
@@ -1069,13 +1095,21 @@
     "watchHoursGoal": 4000,
     "isEligibleForYPP": true,
     "isPartnerEnrolled": true,
-    "estimatedMonthlyEarnings": 3840.75,
-    "allTimeEarnings": 28450,
-    "superThanksEarnings": 4210,
+    "estimatedMonthlyEarnings": 3845.75,
+    "allTimeEarnings": 28455,
+    "superThanksEarnings": 4215,
     "adEarnings": 24240,
     "rpm": 8.92,
     "cpm": 15.4,
     "recentTransactions": [
+      {
+        "id": "st-1789206767900",
+        "type": "super_thanks",
+        "amount": 5,
+        "fromUser": "Alex Rivers",
+        "videoTitle": "Neon Odyssey: 4K 60FPS Cyberpunk Cinema Journey (Official HDR Master)",
+        "date": "Just now"
+      },
       {
         "id": "tx-1",
         "type": "super_thanks",
@@ -1111,10 +1145,49 @@
   },
   "directShares": [],
   "subscriptions": {
-    "chan-cyberarts": true
+    "chan-cyberarts": true,
+    "chan-wildearth": true
+  },
+  "userProfile": {
+    "id": "user-current-1",
+    "name": "Alex Chen (4K Studio)",
+    "handle": "@alexchen4k",
+    "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
+    "bannerUrl": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1600&auto=format&fit=crop",
+    "bio": "Filmmaker and 4K cinematographer documenting the future of visual arts, urban architectures, and HDR color technology. Subscribe for weekly 2160p masters.",
+    "category": "Film & Animation",
+    "location": "San Francisco, CA",
+    "website": "https://alexchen.video",
+    "socialLinks": [
+      {
+        "id": "sl-1",
+        "platform": "Twitter / X",
+        "url": "https://x.com/alexchen4k"
+      },
+      {
+        "id": "sl-2",
+        "platform": "Instagram",
+        "url": "https://instagram.com/alexchen4k"
+      },
+      {
+        "id": "sl-3",
+        "platform": "YouTube",
+        "url": "https://youtube.com/@alexchen4k"
+      }
+    ],
+    "subscribers": 245000,
+    "isVerified": true,
+    "isPartner": true,
+    "joinedDate": "March 2024"
   },
   "savedVideoIds": [
     "vid-4k-cybercity"
   ],
-  "watchHistory": {}
+  "watchHistory": {
+    "vid-1789205598380": {
+      "timestamp": 8,
+      "duration": 80,
+      "updatedAt": "2026-09-12T09:40:17.415Z"
+    }
+  }
 }

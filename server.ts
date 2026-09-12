@@ -700,12 +700,14 @@ function loadDatabase(): DatabaseSchema {
   return initialDb;
 }
 
-function saveDatabase(db: DatabaseSchema) {
+function saveDatabase(dbData: DatabaseSchema) {
   try {
     if (!fs.existsSync(DATA_DIR)) {
       fs.mkdirSync(DATA_DIR, { recursive: true });
     }
-    fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2), 'utf-8');
+    const tempFile = `${DB_FILE}.tmp.${Date.now()}`;
+    fs.writeFileSync(tempFile, JSON.stringify(dbData, null, 2), 'utf-8');
+    fs.renameSync(tempFile, DB_FILE);
   } catch (e) {
     console.error('Failed to save database file:', e);
   }
@@ -1184,6 +1186,17 @@ async function startServer() {
     });
   });
 
+  // Get all comments for a video
+  app.get('/api/videos/:id/comments', (req, res) => {
+    const videoId = req.params.id;
+    const comments = db.comments[videoId] || [];
+    res.json({
+      success: true,
+      comments,
+      count: comments.length,
+    });
+  });
+
   // Post a new comment with Automated AI Moderation check
   app.post('/api/videos/:id/comments', async (req, res) => {
     const videoId = req.params.id;
@@ -1248,7 +1261,9 @@ async function startServer() {
     res.status(201).json({
       success: true,
       comment: newComment,
+      parentCommentId: parentCommentId || null,
       moderationScore: moderation.score,
+      totalComments: video.commentsCount,
     });
   });
 
@@ -1377,7 +1392,16 @@ async function startServer() {
       success: true,
       amount: numAmount,
       newTotal: db.creatorStats.superThanksEarnings,
+      comment: (message && message.trim()) ? db.comments[videoId]?.[0] : null,
       message: `Super Thanks of $${numAmount.toFixed(2)} sent directly to creator!`,
+    });
+  });
+
+  // Get active channel subscriptions
+  app.get('/api/channel/subscriptions', (_req, res) => {
+    res.json({
+      success: true,
+      subscriptions: db.subscriptions || {},
     });
   });
 
